@@ -18,7 +18,6 @@ client.once("ready", () => {
             client.channels.fetch(process.env.PRIVATE_BIRTHDAY_CHANNEL).then((birthdayChannel) => {
                 scheduler.setScheduler(privateChannel, publicChannel);
                 scheduler.scheduleDailyAnnouncement(privateChannel, birthdayChannel);
-                // scheduler.checkForBirthday(birthdayChannel);
             });
         }).catch(err => { console.error(err); });
     }).catch(err => { console.error(err); });
@@ -156,7 +155,9 @@ client.on("message", (message) => {
 
     // Birthday
     if (channel == process.env.PRIVATE_STREAM_CHANNEL ||
-        channel == process.env.PRIVATE_BIRTHDAY_CHANNEL)
+        channel == process.env.TEST_STREAM_CHANNEL ||
+        channel == process.env.PRIVATE_BIRTHDAY_CHANNEL ||
+        channel == process.env.TEST_BIRTHDAY_CHANNEL)
     {
         if (command == "setbirthday")
         {
