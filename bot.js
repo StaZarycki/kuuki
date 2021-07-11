@@ -40,8 +40,8 @@ client.on("message", (message) => {
         //     firebase.addCommandUseToStats("help").then(res => console.log(res));
         //     messageHandler.respondForHelp(message);
         // }
-
-        if (message.author.id == "678739326049189912") {
+        let modArray = ["678739326049189912", "805528099423911966"]
+        if (modArray.includes(message.author.id)) {
             let channelToSendTo;
             if (message_array[0] == "stream") {
                 channelToSendTo = process.env.PRIVATE_STREAM_CHANNEL;
