@@ -44,11 +44,11 @@ client.on("message", (message) => {
         if (message.author.id == "678739326049189912") {
             let channelToSendTo;
             if (message_array[0] == "stream") {
-                channelToSendTo = process.env.TEST_STREAM_CHANNEL;
+                channelToSendTo = process.env.PRIVATE_STREAM_CHANNEL;
             } else if (message_array[0] == "birthday") {
-                channelToSendTo = process.env.TEST_BIRTHDAY_CHANNEL;
+                channelToSendTo = process.env.PRIVATE_BIRTHDAY_CHANNEL;
             } else if (message_array[0] == "reminder") {
-                channelToSendTo = process.env.TEST_REMINDERS_CHANNEL;
+                channelToSendTo = process.env.PRIVATE_REMINDERS_CHANNEL;
             }
 
             let msg;
@@ -59,7 +59,6 @@ client.on("message", (message) => {
 
             let att;
             if (message.attachments.size > 0) {
-                // console.log(message.attachments.first().attachment);
                 att = message.attachments.first().attachment;
             }
 
