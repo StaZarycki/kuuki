@@ -1,5 +1,6 @@
 require("dotenv").config();
 const { Client } = require("discord.js");
+const messageHandler = require("./modules/messageHandler.js");
 
 const client = new Client();
 
@@ -12,10 +13,12 @@ client.once("ready", () => {
 
 // Get messages
 client.on("message", (message) => {
-    
-    if (message[0] != process.env.PREFIX) return;
+    const messageString = message.toString();
 
+    // Please let me out I'm stuck in vim
+    if (messageString[0] != process.env.PREFIX) return;
 
+    messageHandler.replyToCommand(message);
 });
 
 // Login to discord
