@@ -1,3 +1,5 @@
+const fb = require("./firebaseHandler.js");
+
 module.exports = {
     replyToCommand(message) {
         const messageString = message.toString();
@@ -8,11 +10,12 @@ module.exports = {
 
         switch (command) {
             case "ping":
-                message.reply("Pong!");
+                ping(message);
+                break;
         }
     } 
 }
 
-const ping = function() {
-
+const ping = function(message) {
+    message.reply("Pong!");
 }
