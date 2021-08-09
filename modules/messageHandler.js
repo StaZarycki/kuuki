@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const firebase = require("./firebaseHandler.js");
 const helpers = require("./helpers.js");
 const Jimp = require("jimp");
-const fs = require("fs");
+// const fs = require("fs");
 const { registerFont, createCanvas } = require('canvas');
 registerFont('fonts/AmongUs-Regular.ttf', {family: 'sus'});
 
@@ -978,7 +978,7 @@ module.exports = {
         ctx.font = fontConfig;
 
         let newCanvasWidth = parseInt(ctx.measureText(textToDraw).width + 50);
-        let newCanvasHeight = parseInt(parseInt(ctx.font) + 50) * (messageString.match(/^/gm).length);
+        let newCanvasHeight = parseInt(parseInt(ctx.font) + 50) * (message.toString().match(/^/gm).length);
 
         if (newCanvasWidth > 16384 || newCanvasHeight > 16384)
         {
