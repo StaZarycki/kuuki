@@ -3,6 +3,8 @@ const firebase = require("./firebaseHandler.js");
 const helpers = require("./helpers.js");
 const Jimp = require("jimp");
 const fs = require("fs");
+const { registerFont, createCanvas } = require('canvas');
+registerFont('fonts/AmongUs-Regular.ttf', {family: 'sus'});
 
 const timeToWait = 120000;
 
@@ -957,5 +959,44 @@ module.exports = {
     {
         let image = new Discord.MessageAttachment("https://media.discordapp.net/attachments/811659515103543327/832567363274014770/unknown.png");
         message.channel.send(image);
+    },
+    respondForAmong: function(message, params)
+    {
+        if (params.length == 0)
+        {
+            message.reply("Musisz podać argument po komendzie!");
+            return;
+        }
+
+        let textToDraw = "";
+        params.forEach(item => { textToDraw = textToDraw + " " + item.toUpperCase(); })
+
+        let canvas = createCanvas(800, 200)
+        let ctx = canvas.getContext('2d')
+        let fontConfig = '120px "sus"';
+
+        ctx.font = fontConfig;
+
+        let newCanvasWidth = parseInt(ctx.measureText(textToDraw).width + 50);
+        let newCanvasHeight = parseInt(parseInt(ctx.font) + 50) * (messageString.match(/^/gm).length);
+
+        if (newCanvasWidth > 16384 || newCanvasHeight > 16384)
+        {
+            message.reply("Tekst jest za duży! Spróbuj jeszcze raz :)");
+            return;
+        }
+
+        canvas = createCanvas(newCanvasWidth, newCanvasHeight);
+        ctx = canvas.getContext('2d');
+        ctx.font = fontConfig;
+
+        ctx.strokeStyle = 'black';
+        ctx.lineWidth = 20;
+        ctx.textAlign = "center";
+        ctx.strokeText(textToDraw, parseInt(25 + ctx.measureText(textToDraw).width/2.0), parseInt(60 + parseInt(ctx.font)  / 2.0), ctx.measureText(textToDraw).width);
+        ctx.fillStyle = 'white';
+        ctx.fillText(textToDraw, parseInt(25 +  ctx.measureText(textToDraw).width/2.0), parseInt(60 + parseInt(ctx.font) / 2.0), ctx.measureText(textToDraw).width)
+        const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'very_sus_ngl.png');
+        message.channel.send({ content: ``, files: [attachment] });
     }
 }

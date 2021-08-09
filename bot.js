@@ -128,6 +128,10 @@ client.on("message", (message) => {
         firebase.addCommandUseToStats(command);
         messageHandler.respondForBoob(message);
     }
+    else if (command == "among") {
+        firebase.addCommandUseToStats(command);
+        messageHandler.respondForAmong(message, message_array.slice(1));
+    }
 
     // Private channels
     if (channel == process.env.PRIVATE_STREAM_CHANNEL ||
